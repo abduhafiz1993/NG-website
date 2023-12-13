@@ -5,34 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEXT-GENERATION: {% block title %}{% endblock %}</title>
-    <link rel="shortcut icon" href="../statics/img/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="../statics/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://kit.fontawesome.com/b1dbb45f8e.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="postiones">
   <div class="bg-body-tertiary" style="text-align: right; width: 100%; padding-right: 30px;">
     
-    <a href="/login"  class="btn btn-light">Login</a>
-    <a href="/signup"  class="btn btn-primary">Signup</a>
-    <a href="/logout"  class="btn btn-light">Logout</a>
-    <a href="/personal"  class="btn btn-primary"><i class="fa-solid fa-user"></i></a>
+    <a href="{{ url_for('login') }}"  class="btn btn-light">Login</a>
+    <a href="{{ url_for('signup') }}"  class="btn btn-primary">Signup</a>
+    <a href="{{ url_for('logout') }}"  class="btn btn-light">Logout</a>
+    <a href="{{ url_for('personal') }}"  class="btn btn-primary"><i class="fa-solid fa-user"></i></a>
 
   </div>
     <nav class="navbar navbar-expand-lg bg-body-tertiary ">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/">NEXT-GENERATION </a>
+          <a class="navbar-brand" href="#">NEXT-GENERATION </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
+                <a class="nav-link active" aria-current="page" href="{{ url_for('home') }}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/about">About</a>
+                <a class="nav-link" href="{{ url_for('about') }}">About</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -40,20 +40,20 @@
                 </a>
                 <ul class="dropdown-menu">
                   <form action="/product" method="post">
-                  {% for type in types %}
-                  <option class="dropdown-item" id="Laptops" href="/products" value={{type}}>{{type}}</a</option>
-                  {% endfor %}
+                      {% for type in types %}
+                        <option class="dropdown-item" id="Laptops"  name="id" value={{type}}>{{type}}</option>
+                      {% endfor %}
                   </form>
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/contact">Contact Us</a>
+                <a class="nav-link" href="{{ url_for('contact') }}">Contact Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/fav">Favorites</a>
+                <a class="nav-link" href="{{ url_for('fav') }}">Favorites</a>
               </li>
             </ul>
-            <form class="d-flex" role="search">
+            <form class="d-flex" role="search" action="/serach" method="get">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-primary" type="submit">Search</button>
             </form>
@@ -62,7 +62,9 @@
       </nav>
   </div>
   <main>
-    {% block main %}{% endblock %}
+    {% block main %}
+
+    {% endblock %}
   </main>
 
   <footer class="bg-dark text-light py-5">
@@ -86,10 +88,10 @@
             <div class="col-md-4">
                 <h3>Quick Links</h3>
                 <ul class="list-unstyled">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="products.html">Products</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="{{ url_for('about')}}">About Us</a></li>
+                    <li><a href="{{ url_for('contact')}}">Contact Us</a></li>
                 </ul>
             </div>
         </div>

@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+<section id="trend" >
+
+  <h1 style="text-align: center;">Trend</h1>
+
+  <div class="container-flexs">
+  <div class="card item-flexs" >
+    <img src="{{ url_for('static', filename='img/keyboard-product.png') }}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <a href="">Favories</a>
+      <a href="">Description</a>
+      <button class="btn btn-primary float-right">order</button>
+    </div>
+  </div>
+  </div>
+</section>
+{% endblock %}
