@@ -13,10 +13,18 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
+
+@app.route("/personal")
+def personal():
+    return render_template("personal.html", types =Types )
+
+
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template("index.html", types =Types )
+    products = db.execute("SELECT * FROM Products ORDER BY created_at DESC ")
+
+    return render_template("index.html", types =Types, products= products)
 
 
 @app.route("/about")
@@ -28,9 +36,35 @@ def about():
 def contact():
     return render_template("contact.html", types =Types )
 
-@app.route("/fav")
+@app.route("/rem", methods=["POST"])
+def removess():
+    id = int(request.form.get("id"))
+    if id:
+        if "favriote" in session and id in session["favriote"]:
+            session["favriote"].remove(id)
+        products = db.execute("SELECT * FROM Products where product_id in ?", session["favriote"])
+        return redirect("/fav", products =products)
+    return redirect("/fav")
+
+@app.route("/fav", methods=["POST", "GET"])
 def fav():
-    return render_template("fav.html", types =Types )
+    if not "user_id" in session:
+        return redirect("/login")
+
+    if not "favriote" in session:
+        session["favriote"] = []
+    
+    if request.method == "POST":
+        id = request.form.get("id")
+        if id:
+            if not id  in session["favriote"]:
+                session["favriote"].append(id)
+                array = session["favorite"]
+
+    products = db.execute("SELECT * FROM Products where product_id in ?", 
+    array
+    ,)
+    return render_template("fav.html", types =Types, products =products )
 
 
 @app.route("/login", methods=["POST", "GET"])
@@ -102,12 +136,6 @@ def signup():
         return redirect("/home")
 
     return render_template("signup.html")
-
-
-@app.route("/personal")
-def personal():
-    return render_template("personal.html", types =Types )
-
 
 @app.route("/logout")
 def logout():

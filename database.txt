@@ -47,6 +47,7 @@ CREATE TABLE Products (
     description TEXT,
     price DECIMAL NOT NULL,
     stock_quantity INTEGER NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- New column for timestamp
     FOREIGN KEY (type_id) REFERENCES Types(type_id)
 );
 
@@ -58,3 +59,9 @@ CREATE TABLE Orders (
     status TEXT NOT NULL,
     FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
 );
+drop table Orders;
+drop table Types;
+drop table Products;
+
+alter table Products
+add column created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
