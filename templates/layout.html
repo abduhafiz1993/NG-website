@@ -13,11 +13,13 @@
 <body>
   <div class="postiones">
   <div class="bg-body-tertiary" style="text-align: right; width: 100%; padding-right: 30px;">
-    
+    {% if not session["user_id"] %}
     <a href="{{ url_for('login') }}"  class="btn btn-light">Login</a>
     <a href="{{ url_for('signup') }}"  class="btn btn-primary">Signup</a>
+    {% else %}
     <a href="{{ url_for('logout') }}"  class="btn btn-light">Logout</a>
     <a href="{{ url_for('personal') }}"  class="btn btn-primary"><i class="fa-solid fa-user"></i></a>
+    {% endif%}
 
   </div>
     <nav class="navbar navbar-expand-lg bg-body-tertiary ">
@@ -41,7 +43,7 @@
                 <ul class="dropdown-menu">
                   <form action="/product" method="post">
                       {% for type in types %}
-                        <option class="dropdown-item" id="Laptops"  name="id" value={{type}}>{{type}}</option>
+                        <option class="dropdown-item" id="Laptops"  name="id" value="{{ type['type_id'] }}">{{ type["type_name"] }}</option>
                       {% endfor %}
                   </form>
                 </ul>

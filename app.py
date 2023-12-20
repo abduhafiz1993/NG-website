@@ -1,10 +1,12 @@
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session, url_for
 from flask_session import Session
+from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
 
-Types = ["Laptops", "Desktop", "Accesories"]
+db = SQL("sqlite:///database.db")
+Types = db.execute("select * from Types")
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
@@ -33,28 +35,72 @@ def fav():
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
+    session.clear()
     if request.method == "POST":
-        if not request.form.get("username") or not request.form.get("password"):
-            return render_template("failure.html", message = "Fill it properly")
+        # Ensure username was submitted
+        if not request.form.get("username"):
+            return render_template("faliure.html", message = "username must provided")
 
-            
-        session["name"] = request.form.get("username")
+        # Ensure password was submitted
+        elif not request.form.get("password"):
+            return render_template("faliure.html", message = "password must provided")
+
+        # Query database for username
+        rows = db.execute(
+            "SELECT * FROM Users WHERE username = ?", request.form.get("username")
+        )
+
+        # Ensure username exists and password is correct
+        if len(rows) != 1 or not check_password_hash(
+            rows[0]["password"], request.form.get("password")
+        ):
+                return render_template("faliure.html", message = "invalid username and/or password")
+
+        # Remember which user has logged in
+        session["user_id"] = rows[0]["user_id"]
+
+        # Redirect user to home page
         return redirect("/")
     return render_template("login.html")
 
 
 @app.route("/signup", methods =["POST", "GET"])
 def signup():
+    
+    session.clear()
+
     if request.method == "POST":
-        username, password = request.form.get("username"), request.form.get("password")
-        if not username or not password:
-            return render_template("faliure.html", message = "Write password and username")
-        #user = db.execute("select username from users where username = ?", username)
-        #if username == user:
-        #   return render_template("faliure.html", message = "you have account already.")
-        ##db.execute("INSERT INTO USERS (username, password) VALUES (?, ?)", username, password)
-        session['name'] = username
-        return redirect("/")
+        # Ensure username was submitted
+        if not request.form.get("username"):
+            return render_template("faliure.html", message="must provide username")
+
+        # Ensure password was submitted
+        elif not request.form.get("password"):
+            return render_template("faliure.html", message="must provide password")
+        elif not request.form.get("email"):
+            return render_template("faliure.html", message="must provide email")
+        rows = db.execute(
+            "SELECT * FROM Users WHERE username = ?", request.form.get("username")
+        )
+
+        if len(rows) != 0:
+            return render_template("faliure.html", message="username already exist")
+        db.execute(
+            "INSERT INTO Users (username, password, email) VALUES(?, ?, ?)",
+            request.form.get("username"),
+            generate_password_hash(request.form.get("password")),
+            request.form.get("email"),
+        )
+        rows = db.execute(
+            "SELECT * FROM Users WHERE username = ?",
+            request.form.get("username"),
+        )
+        # Remember which user has logged in
+        session["user_id"] = rows[0]["user_id"]
+
+        # Redirect user to home page
+        return redirect("/home")
+
     return render_template("signup.html")
 
 
@@ -65,6 +111,8 @@ def personal():
 
 @app.route("/logout")
 def logout():
-    return redirect("/signup")
+    session.clear()
+
+    return redirect("/")
 
 

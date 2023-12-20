@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "../Flask/Flask"
+		},
+		{
+			"path": "../../CV/New folder/finance"
 		}
 	],
 	"settings": {}
