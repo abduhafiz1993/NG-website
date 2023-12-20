@@ -1,0 +1,60 @@
+-- Create the Users table
+CREATE TABLE Users (
+    user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL,
+    password TEXT NOT NULL,
+    email TEXT NOT NULL,
+    role TEXT DEFAULT 'Customer' NOT NULL
+);
+
+-- Create the Admins table
+CREATE TABLE Admins (
+    admin_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+
+-- Create the Sellers table
+CREATE TABLE Sellers (
+    seller_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+
+-- Create the Customers table
+CREATE TABLE Customers (
+    customer_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id)
+);
+
+CREATE TABLE Types (
+    type_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    type_name TEXT NOT NULL,
+    description TEXT
+);
+
+INSERT INTO Types (type_name, description) VALUES
+    ('Laptops', 'Portable computers for various purposes'),
+    ('Keyboards', 'Input devices for typing characters into a computer'),
+    ('Monitors', 'Displays for outputting visual information'),
+    ('Printers', 'Devices for producing physical copies of documents');
+
+CREATE TABLE Products (
+    product_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    type_id INTEGER,
+    product_name TEXT NOT NULL,
+    description TEXT,
+    price DECIMAL NOT NULL,
+    stock_quantity INTEGER NOT NULL,
+    FOREIGN KEY (type_id) REFERENCES Types(type_id)
+);
+
+CREATE TABLE Orders (
+    order_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    customer_id INTEGER,
+    order_date DATE NOT NULL,
+    total_amount DECIMAL NOT NULL,
+    status TEXT NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+);

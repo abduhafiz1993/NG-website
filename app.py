@@ -6,6 +6,9 @@ app = Flask(__name__)
 
 Types = ["Laptops", "Desktop", "Accesories"]
 
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 
 @app.route("/")
@@ -28,14 +31,31 @@ def fav():
     return render_template("fav.html", types =Types )
 
 
-@app.route("/login")
+@app.route("/login", methods=["POST", "GET"])
 def login():
-    return render_template("login.html", types =Types )
+    if request.method == "POST":
+        if not request.form.get("username") or not request.form.get("password"):
+            return render_template("failure.html", message = "Fill it properly")
+
+            
+        session["name"] = request.form.get("username")
+        return redirect("/")
+    return render_template("login.html")
 
 
-@app.route("/signup")
+@app.route("/signup", methods =["POST", "GET"])
 def signup():
-    return render_template("signup.html", types =Types )
+    if request.method == "POST":
+        username, password = request.form.get("username"), request.form.get("password")
+        if not username or not password:
+            return render_template("faliure.html", message = "Write password and username")
+        #user = db.execute("select username from users where username = ?", username)
+        #if username == user:
+        #   return render_template("faliure.html", message = "you have account already.")
+        ##db.execute("INSERT INTO USERS (username, password) VALUES (?, ?)", username, password)
+        session['name'] = username
+        return redirect("/")
+    return render_template("signup.html")
 
 
 @app.route("/personal")
