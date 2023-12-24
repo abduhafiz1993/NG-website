@@ -1,5 +1,58 @@
 {% extends "layout.html" %}
 
 {% block main %}
-about page
+<section id="about-us" class="py-5">
+    <div class="container" style="margin-top: 100px;">
+        <div class="row " >
+            <div class="col-lg-6 ">
+                <h1>About us</h1>
+                <h2>Welcome to <span class="text-primary">NEXT-GENERATION!</span></h2>
+                <p>NEXT-GENERATION is your one-stop destination for high-quality computer accessories. Founded in 2010, we take pride in offering cutting-edge technology and exceptional customer service.</p>
+                <p>At Tech Haven, our mission is to provide our customers with the latest and most innovative computer accessories while ensuring a seamless shopping experience.</p>
+                <p>We believe in a customer-first approach, and our dedicated team works tirelessly to meet your tech needs.</p>
+            </div>
+            <div class="col-lg-6">
+                <!-- Insert an image or visual representation of your store or team -->
+                <img src="{{ url_for('static' filename ='img/manny-becerra-0sihmMSmnoE-unsplash.jpg') }}" alt="NEXT-GENERATION Store" class="rounded float-start" style="height: 400px;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="our-team" class="bg-light py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Meet Our Team</h2>
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+                <div class="card">
+                    <img src="{{ url_for('static' filename= 'img/imansyah-muhamad-putera-n4KewLKFOZw-unsplash.jpg')}}" class="card-img-top" alt="Team Member 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">John Doe</h5>
+                        <p class="card-text">Founder & CEO</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <!-- Add more team members as needed -->
+                <div class="card">
+                    <img src="{{ url_for('static' filename = 'img/ospan-ali-6xv4A1VA1rU-unsplash.jpg')}}" class="card-img-top" alt="Team Member 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">John Doe</h5>
+                        <p class="card-text">Founder & CEO</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <!-- Add more team members as needed -->
+                <div class="card">
+                    <img src="{{ url_for('static', filename='img/christopher-campbell-rDEOVtE7vOs-unsplash.jpg') }}" class="card-img-top" alt="Team Member 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">John Doe</h5>
+                        <p class="card-text">Founder & CEO</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

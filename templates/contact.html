@@ -1,5 +1,38 @@
 {% extends "layout.html" %}
 
 {% block main %}
-<p>contact page</p>
+<section id="contact-us" class="py-5" >
+    <div class="container" style="padding-top: 100px;">
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Contact Us</h2>
+                <p>Have a question or feedback for us? We'd love to hear from you. Fill out the form below, and we'll get back to you as soon as possible.</p>
+
+                <!-- Add more information, such as business hours, address, etc., if applicable -->
+
+                <ul class="list-unstyled">
+                    <li>Email: <a href="mailto:info@techhaven.com">info@techhaven.com</a></li>
+                    <li>Phone: +1 (555) 123-4567</li>
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <form>
+                    <div class="form-group">
+                        <label for="fullName">Full Name:</label>
+                        <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message:</label>
+                        <textarea class="form-control" id="message" rows="5" placeholder="Enter your message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
