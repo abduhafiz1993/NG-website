@@ -65,3 +65,7 @@ drop table Products;
 
 alter table Products
 add column created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+SELECT *
+FROM Products
+ORDER BY created_at DESC;

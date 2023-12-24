@@ -51,9 +51,11 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('contact') }}">Contact Us</a>
               </li>
+              {% if session["user_id"] %}
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('fav') }}">Favorites</a>
               </li>
+              {% endif %}
             </ul>
             <form class="d-flex" role="search" action="/serach" method="get">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

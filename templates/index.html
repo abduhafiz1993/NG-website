@@ -42,7 +42,7 @@
       <p class="card-text">{{product["description"]}}</p>
       <p class="card-text">Price: {{product["price"]}} $</p>
       <p class="card-text">Stock quantity: {{product["stock_quantity"]}}</p>
-      <form action="/fav">
+      <form action="/fav" method="post">
         <input type="text" hidden value="{{ product[product_id]}}" name = "id">
         <button type="submit">Favorties</button> 
       </form>

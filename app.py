@@ -42,13 +42,16 @@ def removess():
     if id:
         if "favriote" in session and id in session["favriote"]:
             session["favriote"].remove(id)
-        products = db.execute("SELECT * FROM Products where product_id in ?", session["favriote"])
+        products = db.execute("SELECT * FROM Products where product_id in (?)", session["favriote"])
         return redirect("/fav", products =products)
     return redirect("/fav")
 
+
+
+
 @app.route("/fav", methods=["POST", "GET"])
 def fav():
-    if not "user_id" in session:
+    if not session:
         return redirect("/login")
 
     if not "favriote" in session:
@@ -59,12 +62,16 @@ def fav():
         if id:
             if not id  in session["favriote"]:
                 session["favriote"].append(id)
-                array = session["favorite"]
+                return
+    elif request.method == "GET":
+        if len(session["favriote"]) != 0:
+            products = db.execute("SELECT * FROM Products where product_id in (?)", session["favorite"])
+        else:
+            products = []
+        return render_template("fav.html", types =Types, products =products )
 
-    products = db.execute("SELECT * FROM Products where product_id in ?", 
-    array
-    ,)
-    return render_template("fav.html", types =Types, products =products )
+
+
 
 
 @app.route("/login", methods=["POST", "GET"])
@@ -142,5 +149,3 @@ def logout():
     session.clear()
 
     return redirect("/")
-
-
