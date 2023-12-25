@@ -9,7 +9,6 @@
   <div class="container-flexs">
     {% for product in products %}
   <div class="card item-flexs" >
-    <img src="{{ url_for('static', filename='img/'+ product['img']+') }}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{ product['product_name']}}</h5>
       <p class="card-text">{{ product['description'] }}</p>
@@ -25,6 +24,7 @@
       {% endif %}
     </div>
   </div>
+  {% endfor %}
   </div>
 </section>
 {% endblock %}

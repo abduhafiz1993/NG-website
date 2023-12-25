@@ -16,7 +16,21 @@ Session(app)
 
 @app.route("/personal")
 def personal():
-    return render_template("personal.html", types =Types )
+    if not session["user_id"]:
+        return redirect("/login")
+    rows = db.execute("SELECT * FROM Users WHERE user_id = ?", session["user_id"])
+    return render_template("personal.html", types =Types, personal=rows )
+
+@app.route("/update_info", methods=["POST"])
+def update_info():
+    db.execute(
+            "INSERT INTO Users (username, password, email) VALUES(?, ?, ?)",
+            request.form.get("username"),
+            generate_password_hash(request.form.get("password")),
+            request.form.get("email"),
+        )
+    return redirect("/personal")
+
 
 
 @app.route("/")
@@ -76,19 +90,19 @@ def login():
 def admin():
     if not session["user_id"]:
         return redirect("/login")
-    row = db.execute("SELECT * FROM Users WHERE user_id = ?", session["user_id"])
+    rows = db.execute("SELECT * FROM Users WHERE user_id = ?", session["user_id"])
     if rows[0]["role"] == 'Customer':
         return redirect("/")
     customer = db.execute("SELECT * FROM Users where role = ?", 'Customer')
     role = rows[0]["role"]
-    return redirect("/admin" , role = role, customer = customer)
+    return render_template("admin.html" , role = role, customer = customer)
     
 
 @app.route("/product", methods =["POST", "GET"])
 def product():
     role = 'Customer'
     if session["user_id"]:
-        row = db.execute("SELECT * FROM Users WHERE user_id = ?", session["user_id"])
+        rows = db.execute("SELECT * FROM Users WHERE user_id = ?", session["user_id"])
         role = rows[0]["role"]
     if request.method == 'POST':
         products = db.execute("select * from Products where type_id = (select type_id from Types where type_name = ?) ORDER BY created_at DESC limit 32", request.form.get("id"))
@@ -140,4 +154,4 @@ def signup():
 def logout():
     session.clear()
 
-    return redirect("/")
+    return redirect("/") 

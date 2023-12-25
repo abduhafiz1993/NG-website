@@ -1,5 +1,73 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Information</title>
+    <!-- Add any additional styling here -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
 
-{% block main %}
-<p>personal info</p>
-{% endblock %}
+<div class="container">
+    <h2>Personal Information</h2>
+    <form id="personalInfoForm" action="/update_info" method="post">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="username" value="{{personal[0]['username']}}" readonly>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{personal[0]['email']}}" readonly>
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" value="+00000" readonly>
+
+        <button type="button" onclick="enableEdit()">Edit</button>
+        <button type="submit" style="display: none;">Save</button>
+    </form>
+</div>
+
+<script>
+    function enableEdit() {
+        const inputs = document.querySelectorAll('input[readonly]');
+        inputs.forEach(input => input.removeAttribute('readonly'));
+        document.querySelector('button[onclick="enableEdit()"]').style.display = 'none';
+        document.querySelector('button[type="submit"]').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
+

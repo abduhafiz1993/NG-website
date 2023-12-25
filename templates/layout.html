@@ -37,25 +37,20 @@
                 <a class="nav-link" href="{{ url_for('about') }}">About</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Type
-                </a>
-                <ul class="dropdown-menu">
-                  <form action="/product" method="post">
-                      {% for type in types %}
-                        <option class="dropdown-item" id="Laptops"  name="id" value="{{ type['type_id'] }}">{{ type["type_name"] }}</option>
-                      {% endfor %}
-                  </form>
-                </ul>
+                <form action="{{url_for('product')}}" method="post">
+                <select class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <ul class="dropdown-menu">
+                    {% for type in types %}
+                      <option class="dropdown-item" id="Laptops"  name="id" value="{{ type['type_id'] }}">{{ type["type_name"] }}</option>
+                    {% endfor %}
+                
+              </ul>
+                </select>
+              </form>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('contact') }}">Contact Us</a>
               </li>
-              {% if session["user_id"] %}
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('fav') }}">Favorites</a>
-              </li>
-              {% endif %}
             </ul>
             <form class="d-flex" role="search" action="/serach" method="get">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
