@@ -7,14 +7,22 @@
   <h1 style="text-align: center;">Trend</h1>
 
   <div class="container-flexs">
+    {% for product in products %}
   <div class="card item-flexs" >
-    <img src="{{ url_for('static', filename='img/keyboard-product.png') }}" class="card-img-top" alt="...">
+    <img src="{{ url_for('static', filename='img/'+ product['img']+') }}" class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="">Favories</a>
-      <a href="">Description</a>
+      <h5 class="card-title">{{ product['product_name']}}</h5>
+      <p class="card-text">{{ product['description'] }}</p>
+      <p class="card-text">{{ product['stock_quantity'] }}</p>
+      <p class="card-text">{{ product['price'] }}</p>
+      {% if role == 'Supplier' %}
+      <form action="/remove">
+        <input type="text" name = "id" hidden value="">
+        <button type="submit" class="btn btn-warning">Remove</button>
+      </form>
+      {% elif role == 'Customer' %}
       <button class="btn btn-primary float-right">order</button>
+      {% endif %}
     </div>
   </div>
   </div>

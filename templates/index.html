@@ -19,6 +19,7 @@
     {% for type in types %}
   <div class="card item-flexs">
     <div class="card-body">
+      <img src="{{}}" alt="">
       <h3 class="card-title">{{ type["type_name"] }}</h3>
       <p class="card-text">{{ type["description"] }}</p>
     </div>
@@ -46,6 +47,7 @@
         <input type="text" hidden value="{{ product[product_id]}}" name = "id">
         <button type="submit">Favorties</button> 
       </form>
+
       <button class="btn btn-primary float-right">order</button>
     </div>
   </div>

@@ -22,7 +22,7 @@ def personal():
 @app.route("/")
 @app.route("/home")
 def home():
-    products = db.execute("SELECT * FROM Products ORDER BY created_at DESC ")
+    products = db.execute("SELECT * FROM Products ORDER BY created_at DESC LIMIT 16")
 
     return render_template("index.html", types =Types, products= products)
 
@@ -76,17 +76,26 @@ def login():
 def admin():
     if not session["user_id"]:
         return redirect("/login")
-     rows = db.execute(
-            "SELECT * FROM Users WHERE username = ?", session["user_id"]
-        )
-    elif rows[0]["role"] == 'Customer':
+    row = db.execute("SELECT * FROM Users WHERE user_id = ?", session["user_id"])
+    if rows[0]["role"] == 'Customer':
         return redirect("/")
-    
+    customer = db.execute("SELECT * FROM Users where role = ?", 'Customer')
     role = rows[0]["role"]
-    return redirect("/admin" , role = role)
+    return redirect("/admin" , role = role, customer = customer)
     
 
-
+@app.route("/product", methods =["POST", "GET"])
+def product():
+    role = 'Customer'
+    if session["user_id"]:
+        row = db.execute("SELECT * FROM Users WHERE user_id = ?", session["user_id"])
+        role = rows[0]["role"]
+    if request.method == 'POST':
+        products = db.execute("select * from Products where type_id = (select type_id from Types where type_name = ?) ORDER BY created_at DESC limit 32", request.form.get("id"))
+        return render_template("product.html", products = products, role=role)
+        
+    products = db.execute("select * from Products ORDER BY created_at DESC limit 32")
+    return render_template("product.html", products = products, role=role)
 
 @app.route("/signup", methods =["POST", "GET"])
 def signup():
