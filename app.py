@@ -36,41 +36,6 @@ def about():
 def contact():
     return render_template("contact.html", types =Types )
 
-@app.route("/rem", methods=["POST"])
-def removess():
-    id = int(request.form.get("id"))
-    if id:
-        if "favriote" in session and id in session["favriote"]:
-            session["favriote"].remove(id)
-        products = db.execute("SELECT * FROM Products where product_id in (?)", session["favriote"])
-        return redirect("/fav", products =products)
-    return redirect("/fav")
-
-
-
-
-@app.route("/fav", methods=["POST", "GET"])
-def fav():
-    if not session:
-        return redirect("/login")
-
-    if not "favriote" in session:
-        session["favriote"] = []
-    
-    if request.method == "POST":
-        id = request.form.get("id")
-        if id:
-            if not id  in session["favriote"]:
-                session["favriote"].append(id)
-                return
-    elif request.method == "GET":
-        if len(session["favriote"]) != 0:
-            products = db.execute("SELECT * FROM Products where product_id in (?)", session["favorite"])
-        else:
-            products = []
-        return render_template("fav.html", types =Types, products =products )
-
-
 
 
 
@@ -101,8 +66,26 @@ def login():
         session["user_id"] = rows[0]["user_id"]
 
         # Redirect user to home page
+        if rows[0]["role"] != 'Customer':
+            return redirect("/admin")
         return redirect("/")
     return render_template("login.html")
+
+
+@app.route("/admin")
+def admin():
+    if not session["user_id"]:
+        return redirect("/login")
+     rows = db.execute(
+            "SELECT * FROM Users WHERE username = ?", session["user_id"]
+        )
+    elif rows[0]["role"] == 'Customer':
+        return redirect("/")
+    
+    role = rows[0]["role"]
+    return redirect("/admin" , role = role)
+    
+
 
 
 @app.route("/signup", methods =["POST", "GET"])
