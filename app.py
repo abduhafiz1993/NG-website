@@ -15,6 +15,9 @@ Session(app)
 
 @app.route("/insert_product")
 def insert_product():
+    if request.method == 'POST':
+        
+        
     return render_template("up.html")
 
 @app.route("/personal")
@@ -38,7 +41,7 @@ def update_info():
 def add():
     if request.method == "POST":
         db.execute(
-            "INSERT INTO Users (username, password, email, role) VALUES(?, ?, ?)",
+            "INSERT INTO Users (username, password, email, role) VALUES (?, ?, ?)",
             request.form.get("username"),
             generate_password_hash(request.form.get("password")),
             request.form.get("email"),
