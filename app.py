@@ -67,9 +67,22 @@ def home():
 def about():
     return render_template("about.html", types =Types )
 
+@app.route("/dash")
+def dash():
+    products = db.execute("select * from ")
+    return render_template("dash.html", )
 
-@app.route("/contact")
+
+@app.route("/contact", methods =['POST', 'GET'])
 def contact():
+    if request.method == 'POST':
+        db.execute(
+            "INSERT INTO message (name, email, message) VALUES(?, ?, ?)",
+            request.form.get("name"),
+            request.form.get("email"),
+            request.form.get("message"),
+        )
+        return render_template("contact.html", types =Types)
     return render_template("contact.html", types =Types )
 
 
