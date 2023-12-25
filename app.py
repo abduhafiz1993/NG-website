@@ -69,8 +69,9 @@ def about():
 
 @app.route("/dash")
 def dash():
-    products = db.execute("select * from ")
-    return render_template("dash.html", )
+    messages = db.execute("select * from message order by CURRENT_TIMESTAMP desc")
+    feedbacks = db.execute("select * from Feedbacks order by CURRENT_TIMESTAMP desc")
+    return render_template("dash.html", messages = messages, feedbacks= feedbacks )
 
 
 @app.route("/contact", methods =['POST', 'GET'])

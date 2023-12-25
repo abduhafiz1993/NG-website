@@ -19,15 +19,15 @@
                 <form action="/contact" method="post">
                     <div class="form-group">
                         <label for="fullName">Full Name:</label>
-                        <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
+                        <input type="text" class="form-control" name="name" id="fullName" placeholder="Enter your full name" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
                     </div>
                     <div class="form-group">
                         <label for="message">Message:</label>
-                        <textarea class="form-control" id="message" rows="5" placeholder="Enter your message" required></textarea>
+                        <textarea class="form-control" name="message" id="message" rows="5" placeholder="Enter your message" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

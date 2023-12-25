@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://kit.fontawesome.com/b1dbb45f8e.js" crossorigin="anonymous"></script>
 </head>
+<body>
 <div class="container" style="padding-top: 100px;">
     <div class="row">
         <div class="col-lg-6">
@@ -26,6 +27,14 @@
                 <div class="form-group">
                     <label for="password">Password:</label>
                     <input type="password" class="form-control" id="password" placeholder="Enter password" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Role:</label>
+                    <select name="role" id="role">
+                        <option value="Customer">Customer</option>
+                        <option value="Supplier">Supplier</option>
+                        <option value="Admin">Admin</option>
+                    </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Add User</button>
             </form>
