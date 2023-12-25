@@ -13,6 +13,33 @@
 <body>
     
 <div class="container mt-4">
+    <h2>Message</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for message in messages %}
+            <tr>
+                <td>{{ message['id']}}</td>
+                <td>{{message['name']}}</td>
+                <td>{{ message['email']}}</td>
+                <td>{{ message['message']}}</td>
+                <td>{{ message['CURRENT_TIMESTAMP']}}</td>
+            </tr>
+            {% endfor %}
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+</div>
+
+<div class="container mt-4">
     <h2>Feedbacks</h2>
     <table class="table">
         <thead>
@@ -25,13 +52,15 @@
             </tr>
         </thead>
         <tbody>
+            {% for message in feedbacks %}
             <tr>
-                <td>1</td>
-                <td>John Doe</td>
-                <td>john.doe@example.com</td>
-                <td>Great website!</td>
-                <td>2023-01-01 12:34:56</td>
+                <td>{{ message['id']}}</td>
+                <td>{{message['name']}}</td>
+                <td>{{ message['email']}}</td>
+                <td>{{ message['message']}}</td>
+                <td>{{ message['CURRENT_TIMESTAMP']}}</td>
             </tr>
+            {% endfor %}
             <!-- Add more rows as needed -->
         </tbody>
     </table>

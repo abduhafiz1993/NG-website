@@ -13,6 +13,9 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
+@app.route("/update_product")
+def update_product():
+    
 
 @app.route("/personal")
 def personal():

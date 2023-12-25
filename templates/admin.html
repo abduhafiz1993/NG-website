@@ -19,9 +19,16 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="/add">Add users</a>
                     </li>
+                    {% elif role == 'Supplier' %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/update_product">Update Products</a>
+                    </li>
                     {% endif %}
                     <li class="nav-item">
                         <a class="nav-link text-white" href="/personal">Settings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/logout">Logout</a>
                     </li>
                 </ul>
             </div>
