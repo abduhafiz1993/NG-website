@@ -14,10 +14,10 @@
       <h5 class="card-title">{{ product['product_name']}}</h5>
       <p class="card-text">{{ product['description'] }}</p>
       <p class="card-text">{{ product['stock_quantity'] }}</p>
-      <p class="card-text">{{ product['price'] }}</p>
+      <p class="card-text">Price: {{ product['price'] }}</p>
       {% if role == 'Supplier' %}
       <form action="/remove">
-        <input type="text" name = "id" hidden value="">
+        <input type="text" name = "id" hidden value="{{product['product_id']}}">
         <button type="submit" class="btn btn-warning">Remove</button>
       </form>
       {% elif role == 'Customer' %}
