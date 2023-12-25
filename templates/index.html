@@ -37,15 +37,26 @@
     {% for product in products %}
   <div class="card item-flexs" >
 
-    <div class="card-body">
+    <div class="card-body parent-element">
       <h5 class="card-title">{{ product["product_name"]}}</h5>
       <p class="card-text">{{product["description"]}}</p>
       <p class="card-text">Price: {{product["price"]}} $</p>
       <p class="card-text">Stock quantity: {{ product["stock_quantity"]}}</p>
-      <button class="btn btn-primary float-right">order</button>
+      <button class="btn btn-primary float-right" id="orderButton" >order</button>
     </div>
   </div>
+
   {% endfor %}
   </div>
+  <script>
+    // JavaScript code to add <p> to the parent element on button click
+    document.getElementById('orderButton').addEventListener('click',       function() {
+        var parentElement = document.querySelector('.parent-element');
+        var newParagraph = document.createElement('p');
+        newParagraph.classList.add('card-text')
+        newParagraph.textContent = '0988179643';
+        parentElement.appendChild(newParagraph);
+      })
+</script>
 </section>
 {% endblock %}

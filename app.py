@@ -24,10 +24,10 @@ def personal():
 @app.route("/update_info", methods=["POST"])
 def update_info():
     db.execute(
-            "INSERT INTO Users (username, password, email) VALUES(?, ?, ?)",
+            "update Users set username = ? , email = ? where user_id = ?",
             request.form.get("username"),
-            generate_password_hash(request.form.get("password")),
             request.form.get("email"),
+            session["user_id"] 
         )
     return redirect("/personal")
 

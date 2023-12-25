@@ -37,14 +37,12 @@
                 <a class="nav-link" href="{{ url_for('about') }}">About</a>
               </li>
               <li class="nav-item dropdown">
-                <form action="{{url_for('product')}}" method="post">
+                <form action="/porduct" method="POST">
                 <select class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <ul class="dropdown-menu">
+                  <option class="dropdown-item" value="" disabled selected>Select Type</option>
                     {% for type in types %}
                       <option class="dropdown-item" id="Laptops"  name="id" value="{{ type['type_id'] }}">{{ type["type_name"] }}</option>
                     {% endfor %}
-                
-              </ul>
                 </select>
               </form>
               </li>
@@ -92,30 +90,6 @@
                     <li><a href="{{ url_for('about')}}">About Us</a></li>
                     <li><a href="{{ url_for('contact')}}">Contact Us</a></li>
                 </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Feedback Form -->
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <h3 class="text-center mb-4">Feedback Form</h3>
-                <form>
-                    <div class="form-group">
-                        <label for="feedbackName">Name:</label>
-                        <input type="text" class="form-control" id="feedbackName" placeholder="Enter your name">
-                    </div>
-                    <div class="form-group">
-                        <label for="feedbackEmail">Email:</label>
-                        <input type="email" class="form-control" id="feedbackEmail" placeholder="Enter your email">
-                    </div>
-                    <div class="form-group">
-                        <label for="feedbackMessage">Message:</label>
-                        <textarea class="form-control" id="feedbackMessage" rows="3" placeholder="Enter your feedback"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit Feedback</button>
-                </form>
             </div>
         </div>
     </div>
