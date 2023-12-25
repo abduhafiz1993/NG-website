@@ -31,7 +31,29 @@ def update_info():
         )
     return redirect("/personal")
 
-
+@app.route("/add", methods = ["POST", "GET"])
+def add():
+    if request.method == "POST":
+        db.execute(
+            "INSERT INTO Users (username, password, email, role) VALUES(?, ?, ?)",
+            request.form.get("username"),
+            generate_password_hash(request.form.get("password")),
+            request.form.get("email"),
+            request.form.get("role")
+        )
+        return render_template("add.html")
+    return render_template("add.html")
+    
+@app.route("/feedback", methods = ["POST"])
+def feedback():
+        db.execute(
+            "INSERT INTO Feedbacks (name, email, message) VALUES(?, ?, ?)",
+            request.form.get("name"),
+            request.form.get("email"),
+            request.form.get("message"),
+        )
+        return redirect("/")
+    
 
 @app.route("/")
 @app.route("/home")

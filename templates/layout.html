@@ -94,6 +94,30 @@
         </div>
     </div>
 
+    <!-- Feedback Form -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h3 class="text-center mb-4">Feedback Form</h3>
+                <form action="/feedback" method="post">
+                    <div class="form-group">
+                        <label for="feedbackName">Name:</label>
+                        <input name="name" type="text" class="form-control" id="feedbackName" placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="feedbackEmail">Email:</label>
+                        <input name="email" type="email" class="form-control" id="feedbackEmail" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label for="feedbackMessage">Message:</label>
+                        <textarea name="message" class="form-control" id="feedbackMessage" rows="3" placeholder="Enter your feedback"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="text-center mt-4">
         <p>&copy; 2023 NEXT-GENERATION Computer Accessory Store. All rights reserved.</p>
     </div>
