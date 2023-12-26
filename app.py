@@ -13,7 +13,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 
-@app.route("/insert_product")
+@app.route("/insert_product", methods=["POST", "GET"])
 def insert_product():
     if request.method == 'POST':
         if not request.form.get('product_name') and not request.form.get('type_id') and not request.form.get('description') and not request.form.get('price')and not request.form.get('stock_quantity'):
@@ -21,7 +21,7 @@ def insert_product():
         db.execute("insert into Products (product_name, type_id, description, price, stock_quantity) values (?, ?, ?, ?, ?)", 
         request.form.get('product_name'), request.form.get('type_id'), request.form.get('description'), request.form.get('price'), request.form.get('stock_quantity'))    
         return redirect("/product")
-    return render_template("up.html")
+    return render_template("up.html", types =Types)
 
 @app.route("/personal")
 def personal():

@@ -19,8 +19,12 @@
             <input type="text" class="form-control" id="product_name"  name="product_name" placeholder="Enter product name" required>
         </div>
         <div class="form-group">
-            <label for="type_id">Type ID:</label>
-            <input type="number" class="form-control" id="type_id" name="type_id" placeholder="Enter type ID" required>
+            <label for="type_id">Type:</label>
+            <select name="type_id" id="">
+                {% for type in types %}
+                <option value="{{type['type_id']}}">{{type['type_name']}}</option>
+                {% endfor %}
+            </select>
         </div>
         <div class="form-group">
             <label for="description">Description:</label>
