@@ -79,8 +79,10 @@ def about():
 @app.route("/dash")
 def dash():
     messages = db.execute("select * from message order by CURRENT_TIMESTAMP desc")
+    rows = db.execute("SELECT * FROM Users WHERE user_id = ?", session["user_id"])
     feedbacks = db.execute("select * from Feedbacks order by CURRENT_TIMESTAMP desc")
-    return render_template("dash.html", messages = messages, feedbacks= feedbacks )
+    role = rows[0]["role"]
+    return render_template("dash.html", role = role, messages = messages, feedbacks= feedbacks )
 
 
 @app.route("/contact", methods =['POST', 'GET'])

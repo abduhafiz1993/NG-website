@@ -11,7 +11,7 @@
     <script src="https://kit.fontawesome.com/b1dbb45f8e.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    
+    {% if role == 'Supplier'%}
 <div class="container mt-4">
     <h2>Message</h2>
     <table class="table">
@@ -38,7 +38,7 @@
         </tbody>
     </table>
 </div>
-
+{% endif %}
 <div class="container mt-4">
     <h2>Feedbacks</h2>
     <table class="table">
