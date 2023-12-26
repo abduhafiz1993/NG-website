@@ -16,8 +16,11 @@ Session(app)
 @app.route("/insert_product")
 def insert_product():
     if request.method == 'POST':
-        
-        
+        if not request.form.get('product_name') and not request.form.get('type_id') and not request.form.get('description') and not request.form.get('price')and not request.form.get('stock_quantity'):
+            return render_template("faliure.html", message = "Invalid Input")
+        db.execute("insert into Products (product_name, type_id, description, price, stock_quantity) values (?, ?, ?, ?, ?)", 
+        request.form.get('product_name'), request.form.get('type_id'), request.form.get('description'), request.form.get('price'), request.form.get('stock_quantity'))    
+        return redirect("/product")
     return render_template("up.html")
 
 @app.route("/personal")
@@ -45,7 +48,7 @@ def add():
             request.form.get("username"),
             generate_password_hash(request.form.get("password")),
             request.form.get("email"),
-            request.form.get("role")
+            request.form.get("role"),
         )
         return render_template("add.html")
     return render_template("add.html")
