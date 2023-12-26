@@ -36,17 +36,6 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('about') }}">About</a>
               </li>
-              <li class="nav-item dropdown">
-                <form action="/porduct" method="POST">
-                <select class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <option class="dropdown-item" value="" disabled selected>Select Type</option>
-                    {% for type in types %}
-                      <option class="dropdown-item" id="Laptops"  name="id" value="{{ type['type_id'] }}">{{ type["type_name"] }}</option>
-                    {% endfor %}
-                    <button type="submit">Selected</button>
-                </select>
-              </form>
-              </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('contact') }}">Contact Us</a>
               </li>

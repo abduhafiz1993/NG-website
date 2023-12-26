@@ -67,7 +67,7 @@ def feedback():
 @app.route("/")
 @app.route("/home")
 def home():
-    products = db.execute("SELECT * FROM Products ORDER BY created_at DESC LIMIT 16")
+    products = db.execute("SELECT * FROM Products where sold = 'False' ORDER BY created_at DESC LIMIT 16")
 
     return render_template("index.html", types =Types, products= products)
 
@@ -102,6 +102,7 @@ def contact():
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
+
     session.clear()
     if request.method == "POST":
         # Ensure username was submitted
@@ -152,10 +153,10 @@ def product():
         rows = db.execute("SELECT * FROM Users WHERE user_id = ?", session["user_id"])
         role = rows[0]["role"]
     if request.method == 'POST':
-        products = db.execute("select * from Products where type_id = (select type_id from Types where type_name = ?) and sold = 'False' ORDER BY created_at DESC limit 32", request.form.get("id"))
+        products = db.execute("select * from Products where type_id = (select type_id from Types where type_name = ?) and sold = ? ORDER BY created_at DESC limit 32", request.form.get("id"), 'False' )
         return render_template("product.html", products = products, role=role)
         
-    products = db.execute("select * from Products ORDER BY created_at DESC limit 32 where sold = 'False' ")
+    products = db.execute("select * from Products where sold = ? ORDER BY created_at DESC limit 32 ", 'False')
     return render_template("product.html", products = products, role=role)
 
 @app.route("/signup", methods =["POST", "GET"])
