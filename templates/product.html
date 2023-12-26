@@ -14,7 +14,7 @@
 
 <section id="trend" >
 
-  <h1 style="text-align: center;">Trend</h1>
+  <h1 style="text-align: center;">Product</h1>
 
   <div class="container-flexs">
     {% for product in products %}
@@ -22,10 +22,10 @@
     <div class="card-body">
       <h5 class="card-title">{{ product['product_name']}}</h5>
       <p class="card-text">{{ product['description'] }}</p>
-      <p class="card-text">{{ product['stock_quantity'] }}</p>
+      <p class="card-text">Stock quantity:{{ product['stock_quantity'] }}</p>
       <p class="card-text">Price: {{ product['price'] }}</p>
       {% if role == 'Supplier' %}
-      <form action="/remove">
+      <form action="/remove" method="post">
         <input type="text" name = "id" hidden value="{{product['product_id']}}">
         <button type="submit" class="btn btn-warning">Remove</button>
       </form>

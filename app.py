@@ -152,10 +152,10 @@ def product():
         rows = db.execute("SELECT * FROM Users WHERE user_id = ?", session["user_id"])
         role = rows[0]["role"]
     if request.method == 'POST':
-        products = db.execute("select * from Products where type_id = (select type_id from Types where type_name = ?) ORDER BY created_at DESC limit 32", request.form.get("id"))
+        products = db.execute("select * from Products where type_id = (select type_id from Types where type_name = ?) and sold = 'False' ORDER BY created_at DESC limit 32", request.form.get("id"))
         return render_template("product.html", products = products, role=role)
         
-    products = db.execute("select * from Products ORDER BY created_at DESC limit 32")
+    products = db.execute("select * from Products ORDER BY created_at DESC limit 32 where sold = 'False' ")
     return render_template("product.html", products = products, role=role)
 
 @app.route("/signup", methods =["POST", "GET"])
@@ -201,4 +201,9 @@ def signup():
 def logout():
     session.clear()
 
-    return redirect("/") 
+    return redirect("/")
+
+@app.route("/remove", methods= ["POST"])
+def remove():
+    db.execute("update Products set sold = 'True' where product_id = ?", request.form.get("id"))
+    return redirect("/product")
