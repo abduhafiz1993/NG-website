@@ -28,7 +28,7 @@ Description of your application.
 Install dependencies:
 
 pip install -r requirements.txt
-Usage
+## Usage
 Set up your database:
 
 Create a SQLite database named database.db.
@@ -41,13 +41,13 @@ Run the application:
 flask run
 Visit http://localhost:5000 in your browser.
 
-Contributing
+## Contributing
 Fork the repository.
 Create a new branch for your feature: git checkout -b feature-name.
 Commit your changes: git commit -m 'Add some feature'.
 Push to the branch: git push origin feature-name.
 Submit a pull request.
-License
+## License
 This project is licensed under the MIT License.
 
 
