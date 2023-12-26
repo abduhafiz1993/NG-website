@@ -44,13 +44,13 @@ def update_info():
 def add():
     if request.method == "POST":
         db.execute(
-            "INSERT INTO Users (username, password, email, role) VALUES (?, ?, ?)",
+            "INSERT INTO Users (username, password, email, role) VALUES (?, ?, ?, ?)",
             request.form.get("username"),
             generate_password_hash(request.form.get("password")),
             request.form.get("email"),
             request.form.get("role"),
         )
-        return render_template("add.html")
+        return redirect("/admin")
     return render_template("add.html")
     
 @app.route("/feedback", methods = ["POST"])
