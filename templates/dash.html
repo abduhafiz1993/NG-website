@@ -31,7 +31,7 @@
                 <td>{{message['name']}}</td>
                 <td>{{ message['email']}}</td>
                 <td>{{ message['message']}}</td>
-                <td>{{ message['CURRENT_TIMESTAMP']}}</td>
+                <td>{{ message['timestamp']}}</td>
             </tr>
             {% endfor %}
             <!-- Add more rows as needed -->
@@ -55,10 +55,10 @@
             {% for message in feedbacks %}
             <tr>
                 <td>{{ message['id']}}</td>
-                <td>{{message['name']}}</td>
+                <td>{{ message['name']}}</td>
                 <td>{{ message['email']}}</td>
                 <td>{{ message['message']}}</td>
-                <td>{{ message['CURRENT_TIMESTAMP']}}</td>
+                <td>{{ message['timestamp']}}</td>
             </tr>
             {% endfor %}
             <!-- Add more rows as needed -->

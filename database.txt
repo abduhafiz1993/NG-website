@@ -66,6 +66,13 @@ CREATE TABLE Orders (
     email TEXT NOT NULL,
     message TEXT NOT NULL
 );
+
+ CREATE TABLE feedbacks (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    message TEXT NOT NULL
+);
 drop table Orders;
 drop table Types;
 drop table Products;
