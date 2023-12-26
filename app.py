@@ -138,9 +138,9 @@ def admin():
     rows = db.execute("SELECT * FROM Users WHERE user_id = ?", session["user_id"])
     if rows[0]["role"] == 'Customer':
         return redirect("/")
-    customer = db.execute("SELECT * FROM Users where role = ?", 'Customer')
+    customer = db.execute("SELECT * FROM Users")
     role = rows[0]["role"]
-    return render_template("admin.html" , role = role, customer = customer)
+    return render_template("admin.html" , role = role, users = customer)
     
 
 @app.route("/product", methods =["POST", "GET"])
