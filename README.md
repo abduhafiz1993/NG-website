@@ -26,8 +26,9 @@ Description of your application.
    git clone https://github.com/abduhafiz1993/NG-website.git
    cd NG-website
 Install dependencies:
-
-pip install -r requirements.txt
+   ```bash
+   pip install -r requirements.txt
+   ```
 ## Usage
 Set up your database:
 
@@ -38,7 +39,9 @@ Configure your Flask application:
 Copy the .env.example file to .env and update the configuration variables.
 Run the application:
 
-flask run
+   ```bash
+   flask run
+   ```
 Visit http://localhost:5000 in your browser.
 
 ## Contributing
@@ -50,5 +53,4 @@ Submit a pull request.
 ## License
 This project is licensed under the MIT License.
 
-
-Replace "Next-Generation web application " with the actual name of your appl
+Replace "Next-Generation web application " with the actual name of your application. Adjust the sections and content as needed based on your specific project details.
