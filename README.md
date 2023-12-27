@@ -1,5 +1,5 @@
 # Next Generation web application 
-#### Video Demo:  <URL >
+#### Video Demo:  <URL https://youtu.be/ZoWNy4S8ZhE>
 #### Description:
 
 The next generation web application is designed to cater to the needs of three primary actors: the customer, the admin, and the supplier. The admin holds significant authorities within the system, including the ability to add users, view products, and access feedback from customers. Additionally, the admin can manage various aspects of the platform to ensure smooth operations.
